@@ -45,5 +45,5 @@ spring:
       password: 1234
 
 file:
-  path: C:/src/photogram/upload/
+  path: D:/photogram/upload/
 
