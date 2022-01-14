@@ -1,6 +1,7 @@
 package com.cos.photogram.handler;
 
 import com.cos.photogram.handler.ex.CustomApiException;
+import com.cos.photogram.handler.ex.CustomException;
 import com.cos.photogram.handler.ex.CustomValidationApiException;
 import com.cos.photogram.handler.ex.CustomValidationException;
 import com.cos.photogram.util.Script;
@@ -24,7 +25,7 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(CustomValidationException.class)
     public String validationException(CustomValidationException e){ //?를쓰면 알아서 타입을 추측해서 해줌
-        return Script.back((e.getErrorMap().toString()));
+        return Script.back(e.getErrorMap().toString());
     }
 
     @ExceptionHandler(CustomValidationApiException.class)
@@ -32,8 +33,13 @@ public class ControllerExceptionHandler {
         return new ResponseEntity<>(new CMRespDto<>(-1, e.getMessage(), e.getErrorMap()), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(CustomException.class)
+    public String exception(CustomException e){
+        return Script.back(e.getMessage());
+    }
+
     @ExceptionHandler(CustomApiException.class)
-    public ResponseEntity<?> ㅁpiException(CustomApiException e){ //?를쓰면 알아서 타입을 추측해서 해줌
+    public ResponseEntity<?> ApiException(CustomApiException e){ //?를쓰면 알아서 타입을 추측해서 해줌
         return new ResponseEntity<>(new CMRespDto<>(-1, e.getMessage(), null), HttpStatus.BAD_REQUEST);
     }
 }

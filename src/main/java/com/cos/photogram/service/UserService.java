@@ -2,6 +2,7 @@ package com.cos.photogram.service;
 
 import com.cos.photogram.domain.user.User;
 import com.cos.photogram.domain.user.UserRepository;
+import com.cos.photogram.handler.ex.CustomException;
 import com.cos.photogram.handler.ex.CustomValidationApiException;
 import com.cos.photogram.handler.ex.CustomValidationException;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,13 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public User 회원프로필(int userId){
+        User userEntity = userRepository.findById(userId).orElseThrow(()->{
+            throw new CustomException("해당 프로필 페이지는 없는 페이지입니다");
+        });
+        return userEntity;
+    }
 
     @Transactional
     public User 회원수정(int id, User user) {

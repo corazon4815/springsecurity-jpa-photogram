@@ -82,7 +82,6 @@ public class ImageService {
 		// 1. Image 저장
 		Image image = imageUploadDto.toEntity(imageFileName, principalDetails.getUser());
 		Image imageEntity = imageRepository.save(image);
-//		System.out.println(imageEntity);
 //
 //		// 2. Tag 저장
 //		List<Tag> tags = TagUtils.parsingToTagObject(imageReDto.getTags(), imageEntity);
