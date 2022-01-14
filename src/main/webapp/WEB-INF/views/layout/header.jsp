@@ -2,7 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
+<%--세션에 접근하는방법--%>
 <sec:authorize access="isAuthenticated()">
+<%--	property에 써논 값으로 세션에 접근하면 된다는 뜻--%>
+	<%--이렇게 설정하면 매번 컨트롤러로 세션 model을 안남겨줘도 됨 단 넘겨받는값은
+	principalDetails이기때문에 .user를 붙여줘야함--%>
 	<sec:authentication property="principal" var="principal"/>
 </sec:authorize>
 
@@ -50,7 +54,7 @@
 					<li class="navi-item"><a href="/image/popular">
 							<i class="far fa-compass"></i>
 						</a></li>
-					<li class="navi-item"><a href="/user/${principal.user.id}">
+					<li class="navi-item"><a href="/user/1">
 							<i class="far fa-user"></i>
 						</a></li>
 				</ul>

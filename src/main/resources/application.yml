@@ -13,6 +13,12 @@ spring:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
+    devtools:
+      livereload:
+        enabled: true # livereload 사용시 활성화
+    restart:
+      enabled: true #운영 에서는 제거.
+
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -40,3 +46,4 @@ spring:
 
 file:
   path: C:/src/photogram/upload/
+
