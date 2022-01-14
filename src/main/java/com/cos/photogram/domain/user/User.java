@@ -2,10 +2,12 @@ package com.cos.photogram.domain.user;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.*;
 
+import com.cos.photogram.domain.image.Image;
 import org.hibernate.annotations.CreationTimestamp;
 
 
@@ -44,16 +46,20 @@ public class User {
 	private String provider; // 제공자 Google, Facebook, Naver
 	
 	private String role; // USER, ADMIN
-	
-//	@OneToMany(mappedBy = "user")
-//	private List<Image> images;
-	
-	@CreationTimestamp
-	private LocalDate createDate;
+
+	//지금 이테이블은 1이고 이미지테이블은 N이니까 OneToMany
+	//나는 연관관계의 주인이 아니고 테이블에 이 컬럼을 만들지마라
+	//그리고 User를 select할때 해당 User id로 등록된 image들을 다 가져와라
+	//LAZY = User를 select할때 해당 User id로 등록된 image들을 가져오지마 -> 대신 getImages() 함수가 호출될땐 가져와
+	//Eager = User를 select할때 항상 User id로 등록된 image들을 전부 Join해서 가져와
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private List<Image> images;
+
+	private LocalDateTime createDate;
 
 	@PrePersist //디비에 insert 되기 직전에 실행
 	public void createDate() {
-		this.createDate = LocalDate.now();
+		this.createDate = LocalDateTime.now();
 	}
 ;
 }
