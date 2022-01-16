@@ -28,6 +28,10 @@ spring:
 
   jpa:
     open-in-view: true
+#    뷰단까지 세션을 오픈할거냐 안할거냐
+#    user정보를 가져올때 user정보르 가져오면서 영속성컨텍스트에 들어가는데 user가 들고있는 images를 불러올때
+#    open-in-view가 false면 컨트롤단에서 세션이 종료됨 따라서 images를 가져오지못하고 에러남
+#    단 eager로 해놓으면 이미 셀렉해도 들고온 상태이므로 세션이 종료되기전에 가져와있는 상태라 에러가 안남
     hibernate:
       ddl-auto: update
       naming:

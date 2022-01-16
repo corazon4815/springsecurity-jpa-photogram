@@ -28,7 +28,7 @@ function toggleSubscribe(toUserId, obj) {
 		});
 
 
-	} else {
+	} else { //구독을 할때
 
 		$.ajax({
 			type: "post",

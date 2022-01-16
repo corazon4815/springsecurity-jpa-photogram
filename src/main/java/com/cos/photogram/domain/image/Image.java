@@ -61,6 +61,18 @@ public class Image { //한명의 유저는 여러 이미지를 업로드할수�
 //
 //	@Transient
 //	private boolean likeState;
+
+
+	//image 오브젝트를 출력하면 user를 출력하고 그안에 이미지를 출력하면서 무한 출력이 되므로 toString에서 user를 빼준다
+//	@Override
+//	public String toString() {
+//		return "Image[" +
+//				"id=" + id +
+//				", caption='" + caption + '\'' +
+//				", postImageUrl='" + postImageUrl + '\'' +
+//				", createDate=" + createDate +
+//				']';
+//	}
 }
 
 

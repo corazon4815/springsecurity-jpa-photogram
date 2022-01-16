@@ -15,9 +15,9 @@ public interface SubscribeRepository extends JpaRepository<Subscribe, Integer>{
 	@Query(value = "DELETE FROM subscribe WHERE fromUserId = :fromUserId AND toUserId = :toUserId", nativeQuery = true)
 	void mUnSubscribe(int fromUserId, int toUserId); // prepareStatement updateQuery() => -1 0 1
 	
-//	@Query(value = "select count(*) from subscribe where fromUserId = :principalId AND toUserId = :userId", nativeQuery = true)
-//	int mSubscribeState(int principalId, int userId);
-//
-//	@Query(value = "select count(*) from subscribe where fromUserId = :userId", nativeQuery = true)
-//	int mSubscribeCount(int userId);
+	@Query(value = "select count(*) from subscribe where fromUserId = :principalId AND toUserId = :pageUserId", nativeQuery = true)
+	int mSubscribeState(int principalId, int pageUserId);
+
+	@Query(value = "select count(*) from subscribe where fromUserId = :pageUserId", nativeQuery = true)
+	int mSubscribeCount(int pageUserId);
 }
