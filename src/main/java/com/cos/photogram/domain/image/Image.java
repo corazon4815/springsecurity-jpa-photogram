@@ -30,9 +30,10 @@ public class Image { //한명의 유저는 여러 이미지를 업로드할수�
 	private int id;
 	private String caption; // 오늘 나 너무 피곤했어!!
 	private String postImageUrl;
-	
+
+//	@ManyToOne //fk로 저장이 되므로 이름을 바꿔줌
 	@JsonIgnoreProperties({"images"})
-	@ManyToOne //fk로 저장이 되므로 이름을 바꿔줌
+	@ManyToOne(fetch = FetchType.EAGER) //이미지를 select하면 조인해서 User정보를 같이 들고옴
 	@JoinColumn(name = "userId")
 	private User user;
 	

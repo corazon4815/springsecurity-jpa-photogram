@@ -30,15 +30,15 @@ public class ImageService {
 
 	private final ImageRepository imageRepository;
 //	private final TagRepository tagRepository;
-	
-//	@Transactional(readOnly = true)
-//	public List<Image> 인기사진(int principalId){
-//		return imageRepository.mExplore(principalId);
-//	}
-	
-	
+
 	@Value("${file.path}")
 	private String uploadFolder;
+
+	@Transactional(readOnly = true) //true라고 안하면 영속성 컨텍스트 변경감지를 해서 더티체킹, flush(반영)함 ->안하니까성능이좋아짐
+	public Page<Image> 이미지스토리(int principalId, Pageable pageable){
+		Page<Image> images = imageRepository.mStory(principalId, pageable);
+		return images;
+	}
 	
 //	public Page<Image> 피드이미지(int principalId, Pageable pageable){
 //

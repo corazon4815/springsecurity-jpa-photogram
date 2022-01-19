@@ -27,8 +27,8 @@ public class SubscribeService {
 
 		StringBuffer sb = new StringBuffer();
 		sb.append("select u.id, u.username, u.profileImageUrl, ");
-		sb.append("if((select 1 from subscribe where fromUserId = ? and toUserId = u.id), true, false) subscribeState, ");  // principalDetails.user.id
-		sb.append("if(? = u.id , 1, 0) equalUserState "); // principalDetails.user.id
+		sb.append("if((select 1 from subscribe where fromUserId = ? and toUserId = u.id), 1, 0) subscribeState, ");  // principalDetails.user.id
+		sb.append("if((? = u.id), 1, 0) equalUserState "); // principalDetails.user.id
 		sb.append("from user u inner join subscribe s ");
 		sb.append("on u.id = s.toUserId "); // pageUserId
         sb.append("where s.fromUserId = ?"); // 마지막에 세미콜론쓰면안됨
@@ -39,10 +39,9 @@ public class SubscribeService {
 				.setParameter(2, principalId)
 				.setParameter(3, pageUserId);
 
-		System.out.println("쿼리 : "+query.getResultList().get(0));
-
 		//쿼리실행 (qlrm 라이브러리 필요 - dto에 db결과를 매핑하기위해)
 		JpaResultMapper result  = new JpaResultMapper();
+
 		List<SubscribeDto> subscribeDtos = result.list(query, SubscribeDto.class);
 		return subscribeDtos;
 	}

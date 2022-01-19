@@ -64,7 +64,7 @@ function subscribeInfoModalOpen(pageUserId) {
 
 function getSubscribeModalItem(u) {
 
-	let item = `<div class="subscribe__item" id="subscribeModalItem-${u.userId}">
+	let item = `<div class="subscribe__item" id="subscribeModalItem-${u.id}">
 	<div class="subscribe__img">
 		<img src="/upload/${u.profileImageUrl}" alt="" onerror="this.src='/images/person.jpeg'"/>
 	</div>
@@ -72,17 +72,17 @@ function getSubscribeModalItem(u) {
 		<h2>${u.username}</h2>
 	</div>
 	<div class="subscribe__btn">`;
-
-	if (!u.equalState) {
-		if (u.subscribeState) {
-			item += `<button class="cta blue" onclick="toggleSubscribe(${u.userId}, this)">구독취소</button>`;
-		} else {
-			item += `<button class="cta" onclick="toggleSubscribe(${u.userId}, this)">구독하기</button>`;
+	if (!u.equalUserState) { //동일유저가 아니면 (버튼이 있어야함)
+		if (u.subscribeState) { //구독상태
+			item += `<button class="cta blue" onclick="toggleSubscribe(${u.id}, this)">구독취소</button>`;
+		} else { //구독안한상태
+			item += `<button class="cta" onclick="toggleSubscribe(${u.id}, this)">구독하기</button>`;
 		}
 	}
 		item += `
 	</div>
 </div>`;
+	console.log(item)
 
 		return item;
 	}

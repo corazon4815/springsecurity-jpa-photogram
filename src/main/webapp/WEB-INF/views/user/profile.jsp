@@ -52,7 +52,7 @@
                 <ul>
                     <li><a href=""> 게시물<span>${dto.imageCount}</span>
                     </a></li>
-                    <li><a href="javascript:subscribeInfoModalOpen();"> 구독정보<span>${dto.subscribeCount}</span>
+                    <li><a href="javascript:subscribeInfoModalOpen(${dto.user.id});"> 구독정보<span>${dto.subscribeCount}</span>
                     </a></li>
                 </ul>
             </div>
@@ -98,7 +98,7 @@
 <!--로그아웃, 회원정보변경 모달-->
 <div class="modal-info" onclick="modalInfo()">
     <div class="modal">
-        <button onclick="location.href='/user/${user.id}/update'">회원정보 변경</button>
+        <button onclick="location.href='/user/${dto.user.id}/update'">회원정보 변경</button>
         <button onclick="location.href='/logout'">로그아웃</button>
         <button onclick="closePopup('.modal-info')">취소</button>
     </div>

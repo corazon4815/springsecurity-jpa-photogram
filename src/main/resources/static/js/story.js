@@ -16,7 +16,7 @@ let page = 0;
 
 function storyLoad() {
 	$.ajax({
-		url: `/api/image?page=${page}`,
+		url: `/api/image`,
 		dataType:"json",
 	}).done(res =>{
 		res.data.content.forEach((image)=>{
@@ -45,19 +45,7 @@ function getStoryItem(image) {
 	</div>
 
 	<div class="sl__item__contents">
-		<div class="sl__item__contents__icon">
-
-			<button>`;
-				if(image.likeState){
-					item += `<i class="fas fa-heart active" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>`;
-				}else{
-					item += `<i class="far fa-heart" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>`;
-				}
-
-		item +=	`</button>
-		</div>
-
-		<span class="like"><b id="storyLikeCount-${image.id}">${image.likeCount} </b>likes</span>
+	
 
 		<div class="sl__item__contents__content">
 			<p>${image.caption}</p>
@@ -67,7 +55,7 @@ function getStoryItem(image) {
 		<div id="storyCommentList-${image.id}">`;
 
 
-		image.comments.forEach((comment) => {
+	/*	image.comments.forEach((comment) => {
 
 			item +=
 				`<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
@@ -86,7 +74,7 @@ function getStoryItem(image) {
 			item += `
 			</div>`
 				})
-
+*/
 
 	item += `
 		</div>
@@ -109,7 +97,6 @@ $(window).scroll(() => {
 	// console.log("윈도의 높이 ", $(window).height());
 
 	let checkNum = $(window).scrollTop() - ( $(document).height() - $(window).height() );
-	console.log(checkNum);
 
 	if(checkNum<1 && checkNum>-1){ //-1<checkNum<1
 		page++;
