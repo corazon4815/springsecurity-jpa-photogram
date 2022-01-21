@@ -40,7 +40,7 @@ public class Likes { //N
 	private Image image; //하나의 이미지는 좋아요가 여러개일수있음 //1
 
 	//오류가 터지고 잡아보자
-//	@JsonIgnoreProperties({"images"})
+	@JsonIgnoreProperties({"images"})
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User user; //한명의 유저는 좋아요를 여러개할 수 있음

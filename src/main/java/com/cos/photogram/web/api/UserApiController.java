@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -37,5 +38,13 @@ public class UserApiController {
         User userEntity = userService.회원수정(id, userUpdateDto.toEntity());
         principalDetails.setUser(userEntity);
         return new CMRespDto<>(1,"회원수정완료", userEntity); //응답시에 모든 userEntity의 getter함수를 호출해서 json으로 파싱해서 리턴
+    }
+
+    @PutMapping("/api/user/{principalId}/profileImageUrl")
+    public ResponseEntity<?> profileImageUrlUpdate(@PathVariable int principalId, MultipartFile profileImageFile, //profileImageFile : 프론트에서 매칭한 name이름과 동일해야함
+                                                            @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        User userEntity = userService.회원사진변경(principalId, profileImageFile);
+        principalDetails.setUser(userEntity); //세션변경
+        return new ResponseEntity<>(new CMRespDto<>(1, "프로필사진변경 성공", null), HttpStatus.OK);
     }
 }
