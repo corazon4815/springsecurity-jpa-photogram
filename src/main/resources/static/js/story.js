@@ -201,8 +201,8 @@ function addComment(imageId, userId) {
         commentList.prepend(content);
 
     }).fail(error => {
-        console.log("오류", error.responseJSON.data.content)
-        alert(error.responseJSON.data.content);
+        console.log("오류", error.responseJSON);
+        console.log("오류", error.responseJSON.data.content); //"공백일수없습니다"
     });
 
     commentInput.val(""); //인풋 필드를 깨끗하게 비워준다.

@@ -2,6 +2,8 @@ package com.cos.photogram.web.api;
 
 import com.cos.photogram.config.auth.PrincipalDetails;
 import com.cos.photogram.domain.user.User;
+import com.cos.photogram.handler.ex.CustomValidationApiException;
+import com.cos.photogram.handler.ex.CustomValidationException;
 import com.cos.photogram.service.SubscribeService;
 import com.cos.photogram.service.UserService;
 import com.cos.photogram.web.dto.CMRespDto;
@@ -11,10 +13,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -34,7 +41,18 @@ public class UserApiController {
     }
 
     @PutMapping("/api/user/{id}")
-    public CMRespDto<?> update(@PathVariable int id, UserUpdateDto userUpdateDto, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+    public CMRespDto<?> update(@PathVariable int id,
+                               @Valid UserUpdateDto userUpdateDto,
+                               BindingResult bindingResult, //꼭 @Valid가 적혀있는 다음 파라미터에 적어야함
+                               @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        if(bindingResult.hasErrors()){
+            Map<String, String> errorMap = new HashMap<>();
+            for(FieldError error : bindingResult.getFieldErrors()){
+                errorMap.put(error.getField(), error.getDefaultMessage());
+            }
+            throw new CustomValidationApiException("유효성검사 실패함", errorMap);
+        }
+
         User userEntity = userService.회원수정(id, userUpdateDto.toEntity());
         principalDetails.setUser(userEntity);
         return new CMRespDto<>(1,"회원수정완료", userEntity); //응답시에 모든 userEntity의 getter함수를 호출해서 json으로 파싱해서 리턴

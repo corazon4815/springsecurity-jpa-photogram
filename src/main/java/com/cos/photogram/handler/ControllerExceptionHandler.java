@@ -29,7 +29,7 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler(CustomValidationApiException.class)
-    public ResponseEntity<?> validationApiException(CustomValidationException e){ //?를쓰면 알아서 타입을 추측해서 해줌
+    public ResponseEntity<?> validationApiException(CustomValidationApiException e){ //?를쓰면 알아서 타입을 추측해서 해줌
         return new ResponseEntity<>(new CMRespDto<>(-1, e.getMessage(), e.getErrorMap()), HttpStatus.BAD_REQUEST);
     }
 
