@@ -40,8 +40,8 @@ public class ImageService {
 		// 좋아요 하트 색깔 로직 + 좋아요 카운트 로직
 		images.forEach((image)-> {
 
-//			int likeCount = image.getLikes().size();
-//			image.setLikeCount(likeCount);
+			int likeCount = image.getLikes().size();
+			image.setLikeCount(likeCount);
 
 			image.getLikes().forEach((like)->{
 				if(like.getUser().getId() == principalId) { //같으면 좋아요를 한것

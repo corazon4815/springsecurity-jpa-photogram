@@ -33,7 +33,7 @@ spring:
 #    open-in-view가 false면 컨트롤단에서 세션이 종료됨 따라서 images를 가져오지못하고 에러남
 #    단 eager로 해놓으면 이미 셀렉해도 들고온 상태이므로 세션이 종료되기전에 가져와있는 상태라 에러가 안남
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
