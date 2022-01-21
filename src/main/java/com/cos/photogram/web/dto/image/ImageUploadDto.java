@@ -1,10 +1,8 @@
 package com.cos.photogram.web.dto.image;
 
 import org.springframework.web.multipart.MultipartFile;
-
 import com.cos.photogram.domain.image.Image;
 import com.cos.photogram.domain.user.User;
-
 import lombok.Data;
 
 @Data

@@ -1,18 +1,14 @@
 package com.cos.photogram.service;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
 import com.cos.photogram.handler.ex.CustomApiException;
 import com.cos.photogram.web.dto.subscribe.SubscribeDto;
 import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.cos.photogram.domain.subscribe.SubscribeRepository;
-
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

@@ -1,16 +1,10 @@
 package com.cos.photogram.domain.likes;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-
 import javax.persistence.*;
-
-import org.hibernate.annotations.CreationTimestamp;
-
 import com.cos.photogram.domain.image.Image;
 import com.cos.photogram.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

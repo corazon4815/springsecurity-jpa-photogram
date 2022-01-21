@@ -1,25 +1,16 @@
 package com.cos.photogram.domain.user;
 
-import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-
 import javax.persistence.*;
-
 import com.cos.photogram.domain.image.Image;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.CreationTimestamp;
-
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Controller;
 
 //JPA - Java Persistence API (자바로 데이터를 영구적으로 저장할수있는 api를 제공)
-
 @Builder
 @AllArgsConstructor //전체 생성자
 @NoArgsConstructor //빈생성자
@@ -63,5 +54,25 @@ public class User {
 	public void createDate() {
 		this.createDate = LocalDateTime.now();
 	}
-;
+
+	@Override
+	public String toString() {
+		return "User[" +
+				"id=" + id +
+				", username='" + username + '\'' +
+				", password='" + password + '\'' +
+				", name='" + name + '\'' +
+				", website='" + website + '\'' +
+				", bio='" + bio + '\'' +
+				", email='" + email + '\'' +
+				", phone='" + phone + '\'' +
+				", gender='" + gender + '\'' +
+				", profileImageUrl='" + profileImageUrl + '\'' +
+				", provider='" + provider + '\'' +
+				", role='" + role + '\'' +
+				", createDate=" + createDate +
+				']';
+	}
+
+	;
 }

@@ -4,12 +4,10 @@ import com.cos.photogram.domain.user.UserRepository;
 import com.cos.photogram.handler.ex.CustomApiException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.cos.photogram.domain.comment.Comment;
 import com.cos.photogram.domain.comment.CommentRepository;
 import com.cos.photogram.domain.image.Image;
 import com.cos.photogram.domain.user.User;
-
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

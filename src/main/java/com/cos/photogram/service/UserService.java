@@ -1,20 +1,17 @@
 package com.cos.photogram.service;
 
-import com.cos.photogram.config.auth.PrincipalDetails;
 import com.cos.photogram.domain.subscribe.SubscribeRepository;
 import com.cos.photogram.domain.user.User;
 import com.cos.photogram.domain.user.UserRepository;
 import com.cos.photogram.handler.ex.CustomApiException;
 import com.cos.photogram.handler.ex.CustomException;
 import com.cos.photogram.handler.ex.CustomValidationApiException;
-import com.cos.photogram.handler.ex.CustomValidationException;
 import com.cos.photogram.web.dto.user.UserProfileDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.transaction.Transactional;
 import java.nio.file.Files;
 import java.nio.file.Path;

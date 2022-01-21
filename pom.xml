@@ -19,6 +19,7 @@
 	</properties>
 	<dependencies>
 
+<!--		전처리 후처리 해주기-->
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

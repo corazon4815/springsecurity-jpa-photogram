@@ -2,9 +2,7 @@ package com.cos.photogram.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.cos.photogram.domain.likes.LikesRepository;
-
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
