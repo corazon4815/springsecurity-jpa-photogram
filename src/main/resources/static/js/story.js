@@ -60,36 +60,34 @@ function getStoryItem(image) {
 			<p>${image.caption}</p>
 		</div>
 		
+		<!--댓글 div-->
 		<div id="storyCommentList-${image.id}">`;
+    image.comments.forEach((comment) => {
 
-
-    /*	image.comments.forEach((comment) => {
-
-            item +=
-                `<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
+        item +=
+            `<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
                     <p>
                         <b>${comment.user.username} :</b> ${comment.content}
                     </p>`;
 
 
-            if(principalId == comment.user.id){
-                item += `<button onclick="deleteComment(${comment.id})">
+        if (principalId == comment.user.id) {
+            item += `<button onclick="deleteComment(${comment.id})">
                     <i class="fas fa-times"></i>
                 </button>`
-            }
+        }
 
 
-            item += `
+        item += `
             </div>`
-                })
-*/
+    })
 
     item += `
 		</div>
 
 		<div class="sl__item__input">
 			<input type="text" placeholder="댓글 달기..." id="storyCommentInput-${image.id}" />
-				<button type="button" onClick="addComment(${image.id})">게시</button>
+				<button type="button" onClick="addComment(${image.id}, principalId)">게시</button>
 		</div>
 
 	</div>
@@ -161,7 +159,7 @@ function toggleLike(imageId) {
 }
 
 // (4) 댓글쓰기
-function addComment(imageId) {
+function addComment(imageId, userId) {
 
     let commentInput = $(`#storyCommentInput-${imageId}`);
     let commentList = $(`#storyCommentList-${imageId}`);
@@ -171,10 +169,10 @@ function addComment(imageId) {
         content: commentInput.val()
     }
 
-    /*if (data.content === "") {
+    if (data.content === "") {
         alert("댓글을 작성해주세요!");
         return;
-    }*/
+    }
 
     $.ajax({
         type: "post",
@@ -184,6 +182,8 @@ function addComment(imageId) {
         dataType: "json"
     }).done(res => {
         let comment = res.data;
+
+        console.log(comment)
 
         let content = `
 			  <div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}"> 

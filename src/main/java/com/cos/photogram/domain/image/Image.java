@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.cos.photogram.domain.comment.Comment;
 import com.cos.photogram.domain.likes.Likes;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -46,10 +47,10 @@ public class Image { //한명의 유저는 여러 이미지를 업로드할수�
 	@OneToMany(mappedBy = "image") //나는 연관관계의 주인공이 아니니 포린키만들지마세요
 	private List<Likes> likes; // A이미지에 홍길동, 장보고, 임꺽정 좋아요.   (고소영)
 //
-//	@OrderBy("id DESC")  // 정렬
-//	@JsonIgnoreProperties({"image"})
-//	@OneToMany(mappedBy = "image")
-//	private List<Comment> comments;
+	@OrderBy("id DESC")  // 정렬
+	@JsonIgnoreProperties({"image"})
+	@OneToMany(mappedBy = "image")
+	private List<Comment> comments;
 
 	private LocalDateTime createDate;
 
