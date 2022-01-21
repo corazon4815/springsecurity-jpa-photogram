@@ -37,6 +37,18 @@ public class ImageService {
 	@Transactional(readOnly = true) //true라고 안하면 영속성 컨텍스트 변경감지를 해서 더티체킹, flush(반영)함 ->안하니까성능이좋아짐
 	public Page<Image> 이미지스토리(int principalId, Pageable pageable){
 		Page<Image> images = imageRepository.mStory(principalId, pageable);
+		// 좋아요 하트 색깔 로직 + 좋아요 카운트 로직
+		images.forEach((image)-> {
+
+//			int likeCount = image.getLikes().size();
+//			image.setLikeCount(likeCount);
+
+			image.getLikes().forEach((like)->{
+				if(like.getUser().getId() == principalId) { //같으면 좋아요를 한것
+					image.setLikeState(true);
+				}
+			});
+		});
 		return images;
 	}
 	

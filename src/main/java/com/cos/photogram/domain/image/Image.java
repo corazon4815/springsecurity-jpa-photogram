@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.cos.photogram.domain.likes.Likes;
 import org.hibernate.annotations.CreationTimestamp;
 
 //import com.cos.photogram.domain.comment.Comment;
@@ -41,9 +42,9 @@ public class Image { //한명의 유저는 여러 이미지를 업로드할수�
 //	@OneToMany(mappedBy = "image")
 //	private List<Tag> tags;
 //
-//	@JsonIgnoreProperties({"image"})
-//	@OneToMany(mappedBy = "image")
-//	private List<Likes> likes; // A이미지에 홍길동, 장보고, 임꺽정 좋아요.   (고소영)
+	@JsonIgnoreProperties({"image"}) //likes안에 image가 있어서 무한참조되니까
+	@OneToMany(mappedBy = "image") //나는 연관관계의 주인공이 아니니 포린키만들지마세요
+	private List<Likes> likes; // A이미지에 홍길동, 장보고, 임꺽정 좋아요.   (고소영)
 //
 //	@OrderBy("id DESC")  // 정렬
 //	@JsonIgnoreProperties({"image"})
@@ -56,12 +57,13 @@ public class Image { //한명의 유저는 여러 이미지를 업로드할수�
 	public void createDate() {
 		this.createDate = LocalDateTime.now();
 	}
-	
-//	@Transient // 칼럼이 만들어지지 않는다.
+
+
+//	@Transient //db에 칼럼이 만들어지지 않는다.
 //	private int likeCount;
 //
-//	@Transient
-//	private boolean likeState;
+	@Transient
+	private boolean likeState;
 
 
 	//image 오브젝트를 출력하면 user를 출력하고 그안에 이미지를 출력하면서 무한 출력이 되므로 toString에서 user를 빼준다

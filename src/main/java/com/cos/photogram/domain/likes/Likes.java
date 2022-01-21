@@ -1,13 +1,13 @@
-package com.cos.photogram.domain.subscribe;
+package com.cos.photogram.domain.likes;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.cos.photogram.domain.image.Image;
 import com.cos.photogram.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -22,28 +22,28 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(
-		name="subscribe",
+		name="likes",
 		uniqueConstraints={
 			@UniqueConstraint(
-				name = "subscribe_uk",
-				columnNames={"fromUserId","toUserId"} //두개를 복합적으로 유니크로걸때는 이렇게 걺
+				name = "likes_uk",
+				columnNames={"imageId","userId"}  //중복유니크로묶음 (같은사람이 같은그림에 좋아요를 두번할수없음)
 			)
 		}
 	)
-public class Subscribe {
+public class Likes { //N
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int id; 
 	
-	@JsonIgnoreProperties({"images"})
-	@JoinColumn(name = "fromUserId") //_없이 컬럼이 이 이름으로
-	@ManyToOne //구독하기테이블이 N이므로
-	private User fromUser;  // ~~로부터  (1) //구독하는애
-	
-	@JsonIgnoreProperties({"images"})
-	@JoinColumn(name = "toUserId")
-	@ManyToOne //구독하기테이블이 N이므로
-	private User toUser; // ~~를  (3) //구독받는애
+	@ManyToOne
+	@JoinColumn(name = "imageId")
+	private Image image; //하나의 이미지는 좋아요가 여러개일수있음 //1
+
+	//오류가 터지고 잡아보자
+//	@JsonIgnoreProperties({"images"})
+	@ManyToOne
+	@JoinColumn(name = "userId")
+	private User user; //한명의 유저는 좋아요를 여러개할 수 있음
 
 	private LocalDateTime createDate;
 
@@ -52,6 +52,11 @@ public class Subscribe {
 		this.createDate = LocalDateTime.now(); //네이티브쿼리쓸때는 안들어감
 	}
 }
+
+
+
+
+
 
 
 
